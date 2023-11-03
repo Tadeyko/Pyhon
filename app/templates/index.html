@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename = 'css/index.css')}}"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <form method="post" class="form">
+        <h2>Message form</h2>
+
+        <div>
+          {{ form.hidden_tag() }} {{ form.username(placeholder="Ваше ім'я") }}
+        </div>
+        <div>
+          {{ form.hidden_tag() }} {{ form.message(placeholder="Ваше
+          повідомлення") }}
+        </div>
+        <button>Надіслати</button>
+      </form>
+      <div class="messages">
+        {% for message in messages %}
+        <div class="message">
+          <h3>{{ message.username }}</h3>
+          <p>{{ message.message }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% for message in get_flashed_messages() %} {% if message %}
+      <div class="notification">{{ message }}</div>
+      {% endif %} {% endfor %} 
+    </div>
+  </body>
+</html>
